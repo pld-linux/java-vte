@@ -1,6 +1,6 @@
-%define	pname	libvte-java
-%define	api	0.11
-%define	gtkapi	2.4
+%define		pname	libvte-java
+%define		api	0.11
+%define		gtkapi	2.4
 Summary:	Java interface for vte
 Summary(pl):	Wrapper Java dla vte
 Name:		java-vte
