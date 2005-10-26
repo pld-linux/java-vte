@@ -2,7 +2,7 @@
 %define		api	0.11
 %define		gtkapi	2.4
 Summary:	Java interface for vte
-Summary(pl):	Wrapper Java dla vte
+Summary(pl):	Wrapper Javy dla vte
 Name:		java-vte
 Version:	0.11.12
 Release:	1
@@ -29,7 +29,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Java interface for vte.
 
 %description -l pl
-Wrapper Java dla vte.
+Wrapper Javy dla vte.
 
 %package devel
 Summary:	Header files for java-vte library
