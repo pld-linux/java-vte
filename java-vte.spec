@@ -1,29 +1,24 @@
 %define		pname	libvte-java
-%define		api	0.11
-%define		gtkapi	2.4
 Summary:	Java interface for vte
 Summary(pl):	Wrapper Javy dla vte
 Name:		java-vte
-Version:	0.11.12
+Version:	0.12.1
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/java-gnome/%{pname}-%{version}.tar.bz2
-# Source0-md5:	aef130d3e51879907d312fbcae7d2694
-Patch0:		%{name}-configure.patch
-Patch1:		%{name}-version_vars.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libvte-java/0.12/%{pname}-%{version}.tar.bz2
+# Source0-md5:	9d1d28710614910c80486b3bcdf08ae6
 URL:		http://java-gnome.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gcc-java >= 3.3.2
-BuildRequires:	gtk+2-devel >= 2:2.4.3
-BuildRequires:	java-gtk-devel >= 2.4.2
-BuildRequires:	libgcj-devel >= 3.3.2
-BuildRequires:	libgnomecanvas-devel >= 2.6.0
-BuildRequires:	libgnomeui-devel >= 2.6.0
-BuildRequires:	slocate
-BuildRequires:	vte-devel >= 0.11.11
+BuildRequires:	gcc-java >= 5:3.3.2
+BuildRequires:	java-gtk-devel >= 2.9.1
+BuildRequires:	libgcj-devel >= 5:3.3.2
+BuildRequires:	libtool
+BuildRequires:	vte-devel >= 0.13.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		macros	%{_datadir}/glib-java/macros
 
 %description
 Java interface for vte.
@@ -45,23 +40,31 @@ Pliki nag³ówkowe biblioteki java-vte.
 
 %prep
 %setup -q -n %{pname}-%{version}
-%patch0 -p1
-%patch1 -p1
 
 %build
-vteversion="%{version}"; export vteversion
-vteapiversion="%{api}"; export vteapiversion
-gtkapiversion="%{gtkapi}"; export gtkapiversion
+%{__libtoolize}
+%{__aclocal} -I `pkg-config --variable macro_dir gtk2-java` -I %{macros}
+%{__automake}
 %{__autoconf}
-%configure
+%configure \
+	GCJFLAGS="%{rpmcflags}" \
+	JAR=%{_bindir}/fastjar \
+	--without-javadocs
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/java-gnome,%{_libdir}}
+install -d $RPM_BUILD_ROOT{%{_javadir},%{_libdir},%{_pkgconfigdir}} \
+	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+mv -f $RPM_BUILD_ROOT%{_docdir}/%{pname}-%{version}/examples \
+	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+
+rm -f $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/examples/*.in
+rm -rf $RPM_BUILD_ROOT%{_docdir}/%{pname}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -71,10 +74,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README THANKS TODO*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%doc AUTHORS ChangeLog README
+%attr(755,root,root) %{_libdir}/lib*-0.12.so
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_datadir}/java-gnome/*
+%attr(755,root,root) %{_libdir}/libvtejava.so
+%attr(755,root,root) %{_libdir}/libvtejni.so
+%{_javadir}/*
+%{_libdir}/*.la
+%{_pkgconfigdir}/*.pc
+%{_examplesdir}/%{name}-%{version}
