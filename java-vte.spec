@@ -2,20 +2,20 @@
 Summary:	Java interface for vte
 Summary(pl):	Wrapper Javy dla vte
 Name:		java-vte
-Version:	0.12.1
+Version:	0.12.2
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libvte-java/0.12/%{pname}-%{version}.tar.bz2
-# Source0-md5:	9d1d28710614910c80486b3bcdf08ae6
+# Source0-md5:	c6572bb4892353652ba22a3478649102
 URL:		http://java-gnome.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gcc-java >= 5:3.3.2
-BuildRequires:	java-gtk-devel >= 2.9.1
+BuildRequires:	java-gtk-devel >= 2.10.0
 BuildRequires:	libgcj-devel >= 5:3.3.2
 BuildRequires:	libtool
-BuildRequires:	vte-devel >= 0.13.5
+BuildRequires:	vte-devel >= 0.14.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		macros	%{_datadir}/glib-java/macros
