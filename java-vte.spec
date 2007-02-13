@@ -1,6 +1,6 @@
 %define		pname	libvte-java
 Summary:	Java interface for vte
-Summary(pl.UTF-8):   Wrapper Javy dla vte
+Summary(pl.UTF-8):	Wrapper Javy dla vte
 Name:		java-vte
 Version:	0.12.2
 Release:	1
@@ -28,7 +28,7 @@ Wrapper Javy dla vte.
 
 %package devel
 Summary:	Header files for java-vte library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki java-vte
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki java-vte
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
