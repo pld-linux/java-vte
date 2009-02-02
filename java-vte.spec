@@ -5,7 +5,7 @@ Name:		java-vte
 Version:	0.12.2
 Release:	1
 License:	LGPL
-Group:		Libraries
+Group:		Libraries/Java
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libvte-java/0.12/%{pname}-%{version}.tar.bz2
 # Source0-md5:	c6572bb4892353652ba22a3478649102
 URL:		http://java-gnome.sourceforge.net/
